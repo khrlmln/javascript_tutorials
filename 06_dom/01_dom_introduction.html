@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document Object Model (DOM) - Introduction</title>
+    <style>
+      :root {
+        --clr-dark: #070a13;
+        --clr-light: #f1f5f9;
+        --clr-slate400: #94a3b8;
+        --clr-rose: #e11d48;
+        --clr-indigo: #4f46e5;
+      }
+      body {
+        background-color: var(--clr-dark);
+        color: var(--clr-slate400);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+      }
+      a {
+        color: var(--clr-rose);
+      }
+      a:hover {
+        color: var(--clr-indigo);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-black">
+      <h1 id="title" class="heading">Hello World!</h1>
+      <p class="paragraph">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui pariatur
+        rem vitae dignissimos eveniet excepturi error ea delectus atque
+        molestiae?
+      </p>
+      <p class="paragraph">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui pariatur
+        rem vitae dignissimos eveniet excepturi error ea delectus atque
+        molestiae?
+      </p>
+      <p class="paragraph">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui pariatur
+        rem vitae dignissimos eveniet excepturi error ea delectus atque
+        molestiae?
+      </p>
+      <a href="#">Learn More</a>
+    </div>
+
+    <script>
+      // getElementById
+      document.getElementById("title");
+      document.getElementById("title").id;
+      document.getElementById("title").className;
+      document.getElementById("title").getAttribute("class");
+      document.getElementById("title").setAttribute("class", "heading test");
+
+      const title = document.getElementById("title");
+
+      //   applying styles on selected elements
+      title.style.backgroundColor = "var(--clr-indigo)";
+      title.style.color = "var(--clr-light)";
+      title.style.padding = "0.6rem";
+      title.style.borderRadius = "0.35rem";
+
+      //   selecting a text
+      title.innerText; // doesn't gets a hidden contents
+      title.textContent; // gives a complete contents wether it's hidden or not
+      title.innerHTML; // gives a complete contents with html tag
+
+      //   querySelector
+      document.querySelector("#title");
+      document.querySelector(".heading");
+      document.querySelector("h1");
+
+      //   querySelectorAll - Returns as a NodeList
+      const paragraph = document.querySelectorAll("p");
+      paragraph[1].style.color = "var(--clr-rose)";
+
+      //   getElementsByClassName - Returns as a HTMLCollection
+      const allParagraph = document.getElementsByClassName("paragraph");
+      console.log(allParagraph);
+
+      //   converting HTMLCollection into an array
+      const convertedParagraph = Array.from(allParagraph);
+      console.log(convertedParagraph);
+
+      //   looping each paragraph and display on console
+      convertedParagraph.forEach((paragraph) => {
+        console.log(paragraph);
+      });
+    </script>
+  </body>
+</html>

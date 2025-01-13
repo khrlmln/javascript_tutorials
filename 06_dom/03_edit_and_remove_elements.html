@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document Object Model (DOM) - Edit and remove elements</title>
+    <style>
+      :root {
+        --clr-dark: #070a13;
+        --clr-light: #f1f5f9;
+        --clr-slate400: #94a3b8;
+        --clr-rose: #e11d48;
+        --clr-indigo: #4f46e5;
+      }
+      body {
+        background-color: var(--clr-dark);
+        color: var(--clr-slate400);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+      }
+      a {
+        color: var(--clr-rose);
+      }
+      a:hover {
+        color: var(--clr-indigo);
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="language">
+      <li>JavaScript</li>
+    </ul>
+
+    <script>
+      // Add
+      // defining a function which adds new li inside ul list
+      function addLanguage(langName) {
+        const li = document.createElement("li");
+        li.appendChild(document.createTextNode(langName));
+        document.querySelector(".language").appendChild(li);
+      }
+
+      // calling a function
+      addLanguage("C++");
+      addLanguage("Python");
+      addLanguage("PHP");
+
+      // Edit
+      const secondLanguage = document.querySelector("li:nth-child(2)");
+      const newLi = document.createElement("li");
+      newLi.textContent = "Java";
+      secondLanguage.replaceWith(newLi);
+
+      const firstLang = document.querySelector("li:first-child");
+      // const firstLi = document.createElement("li");
+      // firstLi.textContent = "Typescript";
+      // firstLang.replaceWith(firstLi);
+      firstLang.outerHTML = "<li>TypeScript</li>";
+
+      // Remove
+      const lastLang = document.querySelector("li:last-child");
+      lastLang.remove();
+    </script>
+  </body>
+</html>
