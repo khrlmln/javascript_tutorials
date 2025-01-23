@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Request - Introduction</title>
+    <style>
+      :root {
+        --clr-dark: #070a13;
+        --clr-light: #f1f5f9;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+        background-color: var(--clr-dark);
+        color: var(--clr-light);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .profile-card {
+        background-color: #1e2330;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+        overflow: hidden;
+        padding: 20px;
+      }
+
+      .profile-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+      }
+
+      .profile-info {
+        margin-bottom: 20px;
+      }
+
+      .profile-username {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--clr-light);
+      }
+
+      .profile-name {
+        font-size: 1.1rem;
+        color: #bbb;
+        margin-bottom: 10px;
+      }
+
+      .profile-bio {
+        font-size: 1rem;
+        color: #aaa;
+        margin-bottom: 15px;
+      }
+
+      .profile-link {
+        font-size: 1rem;
+        color: #3498db;
+        text-decoration: none;
+      }
+
+      .profile-link:hover {
+        text-decoration: underline;
+      }
+
+      .profile-stats {
+        font-size: 0.9rem;
+        color: #ccc;
+      }
+
+      .profile-stats p {
+        margin: 5px 0;
+      }
+
+      .profile-stats strong {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="profile-card">
+      <img id="avatar" class="profile-avatar" src="" alt="User Avatar" />
+      <div class="profile-info">
+        <h2 id="username" class="profile-username"></h2>
+        <p id="name" class="profile-name"></p>
+        <p id="bio" class="profile-bio"></p>
+        <a id="github-link" href="" target="_blank" class="profile-link"
+          >View on GitHub</a
+        >
+      </div>
+      <div class="profile-stats">
+        <p><strong>Repositories:</strong> <span id="repos"></span></p>
+        <p><strong>Followers:</strong> <span id="followers"></span></p>
+        <p><strong>Following:</strong> <span id="following"></span></p>
+      </div>
+    </div>
+
+    <script>
+      const apiUrl = "https://api.github.com/users/khrlmln";
+      const xhr = new XMLHttpRequest();
+
+      xhr.open("GET", apiUrl);
+      xhr.send();
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          const data = JSON.parse(xhr.responseText); // Parse the response
+          updateProfileCard(data); // Call a function to update the profile card on the webpage
+        }
+      };
+
+      function updateProfileCard(data) {
+        document.getElementById("avatar").src = data.avatar_url;
+        document.getElementById("username").textContent = data.login;
+        document.getElementById("name").textContent =
+          data.name || "No name provided";
+        document.getElementById("bio").textContent =
+          data.bio || "No bio available";
+        document.getElementById("github-link").href = data.html_url;
+        document.getElementById("repos").textContent = data.public_repos;
+        document.getElementById("followers").textContent = data.followers;
+        document.getElementById("following").textContent = data.following;
+      }
+    </script>
+  </body>
+</html>
